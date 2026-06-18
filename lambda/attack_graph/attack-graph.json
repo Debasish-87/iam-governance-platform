@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "id": "DeveloperRole",
+      "type": "Role"
+    }
+  ],
+  "edges": [
+    {
+      "source": "DeveloperRole",
+      "target": "AdministratorAccess",
+      "reason": "Wildcard Admin",
+      "risk": "CRITICAL"
+    }
+  ]
+}

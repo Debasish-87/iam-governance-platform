@@ -1,0 +1,47 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Environment files
+.env
+.env.*
+
+# AWS credentials
+.aws/
+
+# Go
+bin/
+dist/
+*.exe
+*.test
+*.out
+
+# Lambda build artifacts
+bootstrap
+*.zip
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Generated outputs
+output.json
+out1.json
+
+# Local files
+tmp/
+temp/

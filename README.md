@@ -10,6 +10,23 @@ The solution is built using Go, AWS Lambda, Terraform, DynamoDB, CloudWatch, Eve
 
 ---
 
+## Business Impact & Security Outcomes
+
+* Engineered an **AWS IAM Governance & Attack Surface Management Platform** capable of analyzing and monitoring enterprise-scale IAM environments.
+* Developed **8+ automated security analysis engines** for privilege escalation detection, trust policy assessment, root account monitoring, access key auditing, attack path discovery, and IAM risk analysis.
+* Built a serverless security analytics architecture using **6+ AWS Lambda services**, enabling fully automated IAM posture assessments.
+* Designed a centralized findings pipeline capable of processing and storing **1000+ security findings** in DynamoDB for governance reporting and historical analysis.
+* Implemented a quantitative **IAM Security Score (0–100)** framework that continuously evaluates organizational IAM risk posture based on finding severity and exposure levels.
+* Published **15+ custom CloudWatch security metrics** covering attack surface exposure, privilege escalation risks, trust policy weaknesses, security score trends, and severity distribution.
+* Automated security assessments using EventBridge scheduling, reducing manual IAM audit effort and enabling continuous governance monitoring.
+* Developed a real-time executive dashboard providing visibility into critical, high, medium, and low-risk IAM findings across the AWS environment.
+* Implemented automated detection of high-risk IAM misconfigurations including wildcard administrative permissions, PassRole abuse, root trust relationships, federated trust risks, and excessive privilege assignments.
+* Built an attack graph generation engine capable of identifying privilege escalation paths such as PassRole → Lambda and PassRole → EC2 attack chains.
+* Integrated SNS-based alerting workflows to deliver immediate notifications for critical IAM security findings and policy violations.
+* Established a centralized governance repository enabling continuous security posture management, compliance reporting, and risk prioritization across cloud identities.
+
+---
+
 ## Key Features
 
 ### IAM Inventory Analysis

@@ -27,6 +27,12 @@ The solution is built using Go, AWS Lambda, Terraform, DynamoDB, CloudWatch, Eve
 
 ---
 
+# Architecture Deep Drive
+
+<img width="2560" height="2244" alt="Archtiture" src="https://github.com/user-attachments/assets/0602aba1-a5b3-4b77-a1fa-d437206487a3" />
+
+---
+
 ## Key Features
 
 ### IAM Inventory Analysis

@@ -77,6 +77,40 @@ The solution is built using Go, AWS Lambda, Terraform, DynamoDB, CloudWatch, Eve
 <img width="2560" height="2244" alt="Archtiture" src="https://github.com/user-attachments/assets/0602aba1-a5b3-4b77-a1fa-d437206487a3" />
 
 ---
+# Data Flow Diagram
+
+```
+                    AWS IAM
+                       |
+        ----------------------------------
+        |                |              |
+        v                v              v
+
+ Inventory       Access Key      Privilege Escalation
+ Engine          Audit Engine         Engine
+        \             |              /
+         \            |             /
+          \           |            /
+           ------------ ----------
+                      |
+                      v
+
+             Findings Generator
+                      |
+                      v
+
+             DynamoDB Findings
+             iam-security-findings
+                      |
+                      v
+
+             Report Generator
+                      |
+                      v
+
+               Security Reports
+```
+---
 
 ## Key Features
 

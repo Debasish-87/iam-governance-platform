@@ -27,6 +27,51 @@ The solution is built using Go, AWS Lambda, Terraform, DynamoDB, CloudWatch, Eve
 
 ---
 
+# Architecture WorkFlow
+
+```
+                    +------------------+
+                    | AWS IAM Account  |
+                    +------------------+
+                              |
+      ------------------------------------------------
+      |                |               |             |
+      v                v               v             v
+
++--------------+ +---------------+ +---------------+ +---------------+
+| Inventory    | | Access Key    | | Privilege     | | Attack Graph  |
+| Engine       | | Audit Engine  | | Escalation    | | Engine        |
+| (Go)         | | (Go)          | | Engine (Go)   | | (Go)          |
++--------------+ +---------------+ +---------------+ +---------------+
+      |                |               |             |
+      | IAM APIs       | IAM APIs      | IAM APIs    | IAM APIs
+      |                |               |             |
+      ------------------------------------------------
+                              |
+                              v
+
+                 +------------------------+
+                 | Security Findings      |
+                 | DynamoDB Table         |
+                 | iam-security-findings  |
+                 +------------------------+
+                              |
+                              v
+
+                 +------------------------+
+                 | Report Generator       |
+                 | Lambda                 |
+                 +------------------------+
+                              |
+                              v
+
+                 +------------------------+
+                 | Dashboard / Reports    |
+                 +------------------------+
+```
+
+---
+
 # Architecture Deep Drive
 
 <img width="2560" height="2244" alt="Archtiture" src="https://github.com/user-attachments/assets/0602aba1-a5b3-4b77-a1fa-d437206487a3" />

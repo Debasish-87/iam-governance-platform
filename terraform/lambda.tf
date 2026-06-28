@@ -34,10 +34,10 @@ resource "aws_lambda_function" "report_generator" {
 
   handler = "bootstrap"
 
-  filename = "../lambda/report_generator/report_generator.zip"
+  filename = "../lambda/engine/report_generator/report_generator.zip"
 
   source_code_hash = filebase64sha256(
-    "../lambda/report_generator/report_generator.zip"
+    "../lambda/engine/report_generator/report_generator.zip"
   )
 
   timeout = 30
@@ -118,13 +118,69 @@ resource "aws_lambda_function" "sns_alerts" {
 
   handler = "bootstrap"
 
-  filename = "../lambda/sns_alerts/sns_alerts.zip"
+  filename = "../lambda/engine/sns_alerts/sns_alerts.zip"
 
   source_code_hash = filebase64sha256(
-    "../lambda/sns_alerts/sns_alerts.zip"
+    "../lambda/engine/sns_alerts/sns_alerts.zip"
   )
-
   timeout = 60
 }
 
 
+
+
+resource "aws_iam_role_policy" "lambda_scanner_access" {
+
+  name = "lambda-scanner-access"
+
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+
+    Version = "2012-10-17"
+
+    Statement = [
+
+      {
+        Effect = "Allow"
+
+        Action = [
+
+          # EC2 / VPC
+          "ec2:Describe*",
+
+          # S3
+          "s3:ListAllMyBuckets",
+          "s3:GetBucketLocation",
+          "s3:GetBucketAcl",
+          "s3:GetBucketPolicyStatus",
+          "s3:GetBucketEncryption",
+          "s3:GetBucketPublicAccessBlock",
+
+          # IAM
+          "iam:Get*",
+          "iam:List*",
+          "iam:GenerateServiceLastAccessedDetails",
+
+          # RDS
+          "rds:Describe*",
+
+          # EKS
+          "eks:List*",
+          "eks:Describe*",
+
+          # CloudTrail
+          "cloudtrail:DescribeTrails",
+          "cloudtrail:GetTrailStatus",
+          "cloudtrail:LookupEvents",
+
+          # CloudWatch Metrics
+          "cloudwatch:PutMetricData"
+
+        ]
+
+        Resource = "*"
+      }
+    ]
+  })
+}

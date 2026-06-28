@@ -8,10 +8,10 @@ resource "aws_lambda_function" "risk_analyzer" {
 
   handler = "bootstrap"
 
-  filename = "../lambda/risk_analyzer/risk_analyzer.zip"
+  filename = "../lambda/scanners/iam/risk_analyzer/risk_analyzer.zip"
 
   source_code_hash = filebase64sha256(
-    "../lambda/risk_analyzer/risk_analyzer.zip"
+    "../lambda/scanners/iam/risk_analyzer/risk_analyzer.zip"
   )
 
   timeout = 60

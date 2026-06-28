@@ -8,10 +8,10 @@ resource "aws_lambda_function" "trust_analyzer" {
 
   handler = "bootstrap"
 
-  filename = "../lambda/trust_analyzer/trust_analyzer.zip"
+  filename = "../lambda/scanners/iam/trust_analyzer/trust_analyzer.zip"
 
   source_code_hash = filebase64sha256(
-    "../lambda/trust_analyzer/trust_analyzer.zip"
+    "../lambda/scanners/iam/trust_analyzer/trust_analyzer.zip"
   )
 
   timeout = 60

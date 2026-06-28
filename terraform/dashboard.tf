@@ -1,276 +1,511 @@
 resource "aws_cloudwatch_dashboard" "iam_governance" {
 
-dashboard_name = "IAM-Governance"
+  dashboard_name = "IAM-Governance"
 
-dashboard_body = jsonencode({
-
-
-widgets = [
-
-  # --------------------------------------------------
-  # HEADER
-  # --------------------------------------------------
-
-  {
-    type   = "text"
-    x      = 0
-    y      = 0
-    width  = 24
-    height = 2
-
-    properties = {
-      markdown = "# IAM Governance Security Operations Dashboard"
-    }
-  },
-
-  # --------------------------------------------------
-  # EXECUTIVE KPIs
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 0
-    y      = 2
-    width  = 4
-    height = 6
-
-    properties = {
-      title  = "Security Score"
-      view   = "singleValue"
-      region = "ap-south-1"
-      stat   = "Maximum"
-
-      metrics = [
-        ["IAMGovernance","SecurityScore"]
-      ]
-    }
-  },
-
-  {
-    type   = "metric"
-    x      = 4
-    y      = 2
-    width  = 5
-    height = 6
-
-    properties = {
-      title  = "Total Findings"
-      view   = "singleValue"
-      region = "ap-south-1"
-      stat   = "Maximum"
-
-      metrics = [
-        ["IAMGovernance","TotalFindings"]
-      ]
-    }
-  },
-
-  {
-    type   = "metric"
-    x      = 9
-    y      = 2
-    width  = 5
-    height = 6
-
-    properties = {
-      title  = "Critical Findings"
-      view   = "singleValue"
-      region = "ap-south-1"
-      stat   = "Maximum"
-
-      metrics = [
-        ["IAMGovernance","CriticalFindings"]
-      ]
-    }
-  },
-
-  {
-    type   = "metric"
-    x      = 14
-    y      = 2
-    width  = 5
-    height = 6
-
-    properties = {
-      title  = "High Findings"
-      view   = "singleValue"
-      region = "ap-south-1"
-      stat   = "Maximum"
-
-      metrics = [
-        ["IAMGovernance","HighFindings"]
-      ]
-    }
-  },
-
-  {
-    type   = "metric"
-    x      = 19
-    y      = 2
-    width  = 5
-    height = 6
-
-    properties = {
-      title  = "Medium Findings"
-      view   = "singleValue"
-      region = "ap-south-1"
-      stat   = "Maximum"
-
-      metrics = [
-        ["IAMGovernance","MediumFindings"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # SECURITY SCORE TREND
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 0
-    y      = 9
-    width  = 12
-    height = 8
-
-    properties = {
-      title  = "Security Score Trend"
-      region = "ap-south-1"
-      view   = "timeSeries"
-
-      metrics = [
-        ["IAMGovernance","SecurityScore"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # FINDINGS GROWTH
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 12
-    y      = 9
-    width  = 12
-    height = 8
-
-    properties = {
-      title  = "Findings Growth Rate"
-      region = "ap-south-1"
-      view   = "timeSeries"
-
-      metrics = [
-        ["IAMGovernance","TotalFindings"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # SEVERITY DISTRIBUTION
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 0
-    y      = 18
-    width  = 24
-    height = 8
-
-    properties = {
-      title  = "Severity Distribution"
-
-      region = "ap-south-1"
-      view   = "bar"
-
-      metrics = [
-        ["IAMGovernance","CriticalFindings"],
-        ["IAMGovernance","HighFindings"],
-        ["IAMGovernance","MediumFindings"],
-        ["IAMGovernance","LowFindings"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # PRIVILEGE ESCALATION RISKS
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 0
-    y      = 27
-    width  = 12
-    height = 8
-
-    properties = {
-      title  = "Privilege Escalation Risks"
-
-      region = "ap-south-1"
-      view   = "pie"
-
-      metrics = [
-        ["IAMGovernance","PassRoleCount"],
-        ["IAMGovernance","AdminPolicyCount"],
-        ["IAMGovernance","WildcardAdminCount"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # TRUST POLICY RISKS
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 12
-    y      = 27
-    width  = 12
-    height = 8
-
-    properties = {
-      title  = "Trust Policy Risks"
-
-      region = "ap-south-1"
-      view   = "pie"
-
-      metrics = [
-        ["IAMGovernance","RootTrustCount"],
-        ["IAMGovernance","FederatedTrustCount"]
-      ]
-    }
-  },
-
-  # --------------------------------------------------
-  # IAM ATTACK SURFACE
-  # --------------------------------------------------
-
-  {
-    type   = "metric"
-    x      = 0
-    y      = 36
-    width  = 24
-    height = 8
-
-    properties = {
-      title  = "IAM Attack Surface"
-
-      region = "ap-south-1"
-      view   = "bar"
-
-      metrics = [
-        ["IAMGovernance","WildcardAdminCount"],
-        ["IAMGovernance","PassRoleCount"],
-        ["IAMGovernance","RootTrustCount"],
-        ["IAMGovernance","FederatedTrustCount"],
-        ["IAMGovernance","AdminPolicyCount"]
-      ]
-    }
-  }
-]
+  dashboard_body = jsonencode({
 
 
-})
+    widgets = [
+
+      # --------------------------------------------------
+      # HEADER
+      # --------------------------------------------------
+
+      {
+        type   = "text"
+        x      = 0
+        y      = 0
+        width  = 24
+        height = 2
+
+        properties = {
+          markdown = "# CSP - Cloud Security Platform Dashboard"
+        }
+      },
+
+      # --------------------------------------------------
+      # EXECUTIVE KPIs
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 2
+        width  = 4
+        height = 6
+
+        properties = {
+          title  = "Security Score"
+          view   = "singleValue"
+          region = "ap-south-1"
+          stat   = "Maximum"
+
+          metrics = [
+            ["IAMGovernance", "SecurityScore"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 4
+        y      = 2
+        width  = 5
+        height = 6
+
+        properties = {
+          title  = "Total Findings"
+          view   = "singleValue"
+          region = "ap-south-1"
+          stat   = "Maximum"
+
+          metrics = [
+            ["IAMGovernance", "TotalFindings"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 9
+        y      = 2
+        width  = 5
+        height = 6
+
+        properties = {
+          title  = "Critical Findings"
+          view   = "singleValue"
+          region = "ap-south-1"
+          stat   = "Maximum"
+
+          metrics = [
+            ["IAMGovernance", "CriticalFindings"]
+          ]
+        }
+      },
+
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 45
+        width  = 24
+        height = 8
+
+        properties = {
+          title = "Findings by Service"
+
+          region = "ap-south-1"
+          view   = "bar"
+
+          metrics = [
+            ["IAMGovernance", "EC2Findings"],
+            ["IAMGovernance", "S3Findings"],
+            ["IAMGovernance", "VPCFindings"],
+            ["IAMGovernance", "RDSFindings"],
+            ["IAMGovernance", "EKSFindings"],
+            ["IAMGovernance", "CloudTrailFindings"],
+            ["IAMGovernance", "IAMFindings"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 54
+        width  = 12
+        height = 8
+
+        properties = {
+          title = "Critical Risk Types"
+
+          region = "ap-south-1"
+
+          view = "pie"
+
+          metrics = [
+            ["IAMGovernance", "PublicBucketCount"],
+            ["IAMGovernance", "PublicEC2Count"],
+            ["IAMGovernance", "CloudTrailDisabledCount"],
+            ["IAMGovernance", "PrivilegeEscalationCount"],
+            ["IAMGovernance", "RootLoginCount"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 12
+        y      = 54
+        width  = 12
+        height = 8
+
+        properties = {
+
+          title = "Cloud Exposure"
+
+          region = "ap-south-1"
+
+          view = "pie"
+
+          metrics = [
+
+            ["IAMGovernance", "PublicBucketCount"],
+            ["IAMGovernance", "PublicInstanceCount"],
+            ["IAMGovernance", "PublicRDSCount"],
+            ["IAMGovernance", "PublicEKSCount"],
+            ["IAMGovernance", "OpenSecurityGroupCount"]
+
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 63
+        width  = 8
+        height = 6
+
+        properties = {
+
+          title = "Root Activity"
+
+          region = "ap-south-1"
+
+          view = "singleValue"
+
+          metrics = [
+            ["IAMGovernance", "RootLoginCount"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 8
+        y      = 63
+        width  = 8
+        height = 6
+
+        properties = {
+
+          title = "Old Access Keys"
+
+          region = "ap-south-1"
+
+          view = "singleValue"
+
+          metrics = [
+            ["IAMGovernance", "OldAccessKeyCount"]
+          ]
+        }
+      },
+
+
+      {
+        type   = "metric"
+        x      = 16
+        y      = 63
+        width  = 8
+        height = 6
+
+        properties = {
+
+          title = "Privilege Escalation"
+
+          region = "ap-south-1"
+
+          view = "singleValue"
+
+          metrics = [
+            ["IAMGovernance", "PrivilegeEscalationCount"]
+          ]
+        }
+      },
+
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 70
+        width  = 24
+        height = 8
+
+        properties = {
+
+          title = "Publicly Exposed Resources"
+
+          region = "ap-south-1"
+
+          view = "bar"
+
+          metrics = [
+            ["IAMGovernance", "PublicBucketCount"],
+            ["IAMGovernance", "PublicInstanceCount"],
+            ["IAMGovernance", "PublicRDSCount"],
+            ["IAMGovernance", "PublicEKSCount"]
+          ]
+        }
+      },
+
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 79
+        width  = 12
+        height = 8
+
+        properties = {
+
+          title = "Encryption Issues"
+
+          region = "ap-south-1"
+
+          view = "pie"
+
+          metrics = [
+            ["IAMGovernance", "S3EncryptionDisabled"],
+            ["IAMGovernance", "RDSEncryptionDisabled"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 12
+        y      = 79
+        width  = 12
+        height = 8
+
+        properties = {
+
+          title = "Network Security"
+
+          region = "ap-south-1"
+
+          view = "pie"
+
+          metrics = [
+            ["IAMGovernance", "OpenSecurityGroupCount"],
+            ["IAMGovernance", "IMDSv1EnabledCount"]
+          ]
+        }
+      },
+
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 88
+        width  = 24
+        height = 8
+
+        properties = {
+
+          title = "Findings Timeline"
+
+          region = "ap-south-1"
+
+          view = "timeSeries"
+
+          metrics = [
+            ["IAMGovernance", "TotalFindings"]
+          ]
+        }
+      },
+
+
+
+      {
+        type   = "metric"
+        x      = 14
+        y      = 2
+        width  = 5
+        height = 6
+
+        properties = {
+          title  = "High Findings"
+          view   = "singleValue"
+          region = "ap-south-1"
+          stat   = "Maximum"
+
+          metrics = [
+            ["IAMGovernance", "HighFindings"]
+          ]
+        }
+      },
+
+      {
+        type   = "metric"
+        x      = 19
+        y      = 2
+        width  = 5
+        height = 6
+
+        properties = {
+          title  = "Medium Findings"
+          view   = "singleValue"
+          region = "ap-south-1"
+          stat   = "Maximum"
+
+          metrics = [
+            ["IAMGovernance", "MediumFindings"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # SECURITY SCORE TREND
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 9
+        width  = 12
+        height = 8
+
+        properties = {
+          title  = "Security Score Trend"
+          region = "ap-south-1"
+          view   = "timeSeries"
+
+          metrics = [
+            ["IAMGovernance", "SecurityScore"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # FINDINGS GROWTH
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 12
+        y      = 9
+        width  = 12
+        height = 8
+
+        properties = {
+          title  = "Findings Growth Rate"
+          region = "ap-south-1"
+          view   = "timeSeries"
+
+          metrics = [
+            ["IAMGovernance", "TotalFindings"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # SEVERITY DISTRIBUTION
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 18
+        width  = 24
+        height = 8
+
+        properties = {
+          title = "Severity Distribution"
+
+          region = "ap-south-1"
+          view   = "bar"
+
+          metrics = [
+            ["IAMGovernance", "CriticalFindings"],
+            ["IAMGovernance", "HighFindings"],
+            ["IAMGovernance", "MediumFindings"],
+            ["IAMGovernance", "LowFindings"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # PRIVILEGE ESCALATION RISKS
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 27
+        width  = 12
+        height = 8
+
+        properties = {
+          title = "Privilege Escalation Risks"
+
+          region = "ap-south-1"
+          view   = "pie"
+
+          metrics = [
+            ["IAMGovernance", "PassRoleCount"],
+            ["IAMGovernance", "AdminPolicyCount"],
+            ["IAMGovernance", "WildcardAdminCount"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # TRUST POLICY RISKS
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 12
+        y      = 27
+        width  = 12
+        height = 8
+
+        properties = {
+          title = "Trust Policy Risks"
+
+          region = "ap-south-1"
+          view   = "pie"
+
+          metrics = [
+            ["IAMGovernance", "RootTrustCount"],
+            ["IAMGovernance", "FederatedTrustCount"]
+          ]
+        }
+      },
+
+      # --------------------------------------------------
+      # IAM ATTACK SURFACE
+      # --------------------------------------------------
+
+      {
+        type   = "metric"
+        x      = 0
+        y      = 36
+        width  = 24
+        height = 8
+
+        properties = {
+          title = "IAM Attack Surface"
+
+          region = "ap-south-1"
+          view   = "bar"
+
+          metrics = [
+            ["IAMGovernance", "WildcardAdminCount"],
+            ["IAMGovernance", "PassRoleCount"],
+            ["IAMGovernance", "RootTrustCount"],
+            ["IAMGovernance", "FederatedTrustCount"],
+            ["IAMGovernance", "AdminPolicyCount"]
+          ]
+        }
+      }
+    ]
+
+
+  })
 }
 
 

@@ -30,3 +30,4 @@ Thumbs.db
 
 # AWS
 *.pem
+lambda/scanners/**/ec2-scanner

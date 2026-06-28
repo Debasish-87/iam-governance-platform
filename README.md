@@ -1,4 +1,4 @@
-# IAM Governance Platform
+# CSP - Cloud Security Platform
 
 ## Overview
 
